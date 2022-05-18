@@ -26,7 +26,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Firebase Meetup',
+      title: 'Encontro do Firebase',
       theme: ThemeData(
         buttonTheme: Theme.of(context).buttonTheme.copyWith(
               highlightColor: Colors.deepPurple,
@@ -49,14 +49,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firebase Meetup'),
+        title: const Text('Encontro do Firebase'),
       ),
       body: ListView(
         children: <Widget>[
           Image.asset('assets/codelab.png'),
           const SizedBox(height: 8),
-          const IconAndDetail(Icons.calendar_today, 'October 30'),
-          const IconAndDetail(Icons.location_city, 'San Francisco'),
+          const IconAndDetail(Icons.calendar_today, '07 de Outubro'),
+          const IconAndDetail(Icons.location_city, 'Aracaju'),
           // Add from here
           Consumer<ApplicationState>(
             builder: (context, appState, _) => Authentication(
@@ -78,9 +78,9 @@ class HomePage extends StatelessWidget {
             endIndent: 8,
             color: Colors.grey,
           ),
-          const Header("What we'll be doing"),
+          const Header("O que estaremos fazendo"),
           const Paragraph(
-            'Join us for a day full of Firebase Workshops and Pizza!',
+            'Junte-se a nós para um dia cheio de workshops e pizza do Firebase!',
           ),
           // Add the following two lines.
           // Modify from here
@@ -90,11 +90,11 @@ class HomePage extends StatelessWidget {
               children: [
                 // Add from here
                 if (appState.attendees >= 2)
-                  Paragraph('${appState.attendees} people going')
+                  Paragraph('${appState.attendees} pessoas indo')
                 else if (appState.attendees == 1)
-                  const Paragraph('1 person going')
+                  const Paragraph('1 pessoa vai')
                 else
-                  const Paragraph('No one going'),
+                  const Paragraph('Ninguém vai'),
                 // To here.
                 if (appState.loginState == ApplicationLoginState.loggedIn) ...[
                   // Add from here
@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
                     onSelection: (attending) => appState.attending = attending,
                   ),
                   // To here.
-                  const Header('Discussion'),
+                  const Header('Discussão'),
                   GuestBook(
                     addMessage: (message) =>
                         appState.addMessageToGuestBook(message),
@@ -292,7 +292,7 @@ class ApplicationState extends ChangeNotifier {
   // Add from here
   Future<DocumentReference> addMessageToGuestBook(String message) {
     if (_loginState != ApplicationLoginState.loggedIn) {
-      throw Exception('Must be logged in');
+      throw Exception('Deve estar logado');
     }
 
     return FirebaseFirestore.instance
@@ -347,11 +347,11 @@ class _GuestBookState extends State<GuestBook> {
                   child: TextFormField(
                     controller: _controller,
                     decoration: const InputDecoration(
-                      hintText: 'Leave a message',
+                      hintText: 'Deixe um recado',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your message to continue';
+                        return 'Digite sua mensagem para continuar';
                       }
                       return null;
                     },
@@ -369,7 +369,7 @@ class _GuestBookState extends State<GuestBook> {
                     children: const [
                       Icon(Icons.send),
                       SizedBox(width: 4),
-                      Text('SEND'),
+                      Text('MANDAR'),
                     ],
                   ),
                 ),
@@ -404,12 +404,12 @@ class YesNoSelection extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(elevation: 0),
                 onPressed: () => onSelection(Attending.yes),
-                child: const Text('YES'),
+                child: const Text('SIM'),
               ),
               const SizedBox(width: 8),
               TextButton(
                 onPressed: () => onSelection(Attending.no),
-                child: const Text('NO'),
+                child: const Text('NÃO'),
               ),
             ],
           ),
@@ -421,13 +421,13 @@ class YesNoSelection extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () => onSelection(Attending.yes),
-                child: const Text('YES'),
+                child: const Text('SIM'),
               ),
               const SizedBox(width: 8),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(elevation: 0),
                 onPressed: () => onSelection(Attending.no),
-                child: const Text('NO'),
+                child: const Text('NÃO'),
               ),
             ],
           ),
@@ -439,12 +439,12 @@ class YesNoSelection extends StatelessWidget {
             children: [
               StyledButton(
                 onPressed: () => onSelection(Attending.yes),
-                child: const Text('YES'),
+                child: const Text('SIM'),
               ),
               const SizedBox(width: 8),
               StyledButton(
                 onPressed: () => onSelection(Attending.no),
-                child: const Text('NO'),
+                child: const Text('NÃO'),
               ),
             ],
           ),
